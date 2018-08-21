@@ -33,6 +33,7 @@ public class TestController {
         }else{
             apiReponse.setData(list);
             redisService.clearValue("role");
+            redisService.clearValue("name");
         }
         return apiReponse;
     }
@@ -40,6 +41,8 @@ public class TestController {
     public ApiReponse fetchRoleList(){
         ApiReponse apiReponse=new ApiReponse();
         List<Role> list=testService.fetchRoleList();
+        redisService.setList("role",list);
+        redisService.set("name","wangzhipeng");
         apiReponse.setData(list);
         return apiReponse;
     }
